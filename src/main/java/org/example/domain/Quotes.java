@@ -1,11 +1,11 @@
-package org.example;
+package org.example.domain;
 
-class Quotes {
+public class Quotes {
     private int id;
     private String name;
     private String author;
 
-    Quotes() {
+    public Quotes() {
 
     }
 

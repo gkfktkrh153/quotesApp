@@ -1,15 +1,13 @@
 package org.example;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.example.controller.QuotesController;
+import org.example.domain.Quotes;
+import org.example.file.File;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.stream.Collectors;
 
 
 public class Main {
@@ -18,40 +16,33 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         Scanner sc = new Scanner(System.in);
-        List<Quotes> quotesList = new ArrayList<>();
-        App app = new App();
+        File file = new File();
 
+        QuotesController quotesController = new QuotesController();
 
-        app.readJson(quotesList); // 명언 리스트 불러오기
+        file.readJson(); // 명언 리스트 불러오기
 
         System.out.println("== 명언 앱 ==");
-        String s;
-        int num = 1;
+        String command;
 
 
         while(true){
             System.out.print("명령) ");
-            s = sc.nextLine();
+            command = sc.nextLine();
 
-            if (s.equals("등록"))
-                app.register(quotesList,num++);
-            else if(s.equals("목록"))
-                app.list(quotesList);
-            else if(s.contains("삭제?id=")){
-                String[] split = s.split("=");
-                int deleteId = Integer.parseInt(split[1]);
-
-                app.delete(quotesList, deleteId);
+            if (command.equals("등록"))
+                quotesController.register();
+            else if(command.equals("목록"))
+                quotesController.list();
+            else if(command.contains("삭제?id=")){
+                quotesController.delete(command);
             }
-            else if(s.contains("수정?id=")){
-                String[] split = s.split("=");
-                int updateId = Integer.parseInt(split[1]);
-
-                app.update(quotesList, updateId);
+            else if(command.contains("수정?id=")){
+                quotesController.update(command);
             }
-            else if(s.equals("빌드"))
-                app.writeJson(quotesList);
-            else if (s.equals("종료"))
+            else if(command.equals("빌드"))
+                file.writeJson();
+            else if (command.equals("종료"))
                 break;
             else
                 System.out.println("잘못된 명령입니다.");
