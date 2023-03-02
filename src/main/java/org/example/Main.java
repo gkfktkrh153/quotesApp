@@ -57,11 +57,6 @@ public class Main {
                 System.out.println("잘못된 명령입니다.");
         }
 
-
-
-
-
-
     }
 }
 
