@@ -37,7 +37,26 @@ public class Main {
                     System.out.println(deleteId + "번 명언은 존재하지 않습니다.");
                 }
             }
+            else if(s.contains("수정?id=")){
+                String[] split = s.split("=");
+                int updateId = Integer.parseInt(split[1]);
+                Quotes update = quotesList.get(updateId);
+                if(update == null){
+                    System.out.println(updateId + "번 명언은 존재하지 않습니다.");
+                    continue;
+                }
 
+                System.out.println("명언(기존) : " + update.getName());
+                System.out.print("명언 : ");
+                update.setName(sc.nextLine());
+
+                System.out.println("작가(기존) : " + update.getAuthor());
+                System.out.print("작가 : ");
+                update.setAuthor(sc.nextLine());
+
+            }
+            else
+                System.out.println("잘못된 명령입니다.");
 
 
 
