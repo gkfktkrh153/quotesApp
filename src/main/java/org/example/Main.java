@@ -17,7 +17,7 @@ public class Main {
         App app = new App();
 
         do {
-            System.out.print("명언) ");
+            System.out.print("명령) ");
             s = sc.nextLine();
 
             if (s.equals("등록")) {
@@ -32,7 +32,10 @@ public class Main {
             else if(s.contains("삭제?id=")){
                 String[] split = s.split("=");
                 int deleteId = Integer.parseInt(split[1]);
-                quotesList.remove(deleteId);
+                Quotes remove = quotesList.remove(deleteId);
+                if(remove == null){
+                    System.out.println(deleteId + "번 명언은 존재하지 않습니다.");
+                }
             }
 
 
