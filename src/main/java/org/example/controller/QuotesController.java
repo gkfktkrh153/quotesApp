@@ -1,28 +1,27 @@
 package org.example.controller;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.example.domain.Quotes;
+import org.example.repository.QuotesRepository;
 import org.example.service.QuotesService;
-
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.List;
 import java.util.Scanner;
 
+import static org.example.repository.QuotesRepository.quotesList;
+
+
 public class QuotesController {
     private int id = 1;
-    private final Scanner sc;
-    private final ObjectMapper objectMapper;
+    private Scanner sc;
     private QuotesService quotesService;
-
+    private QuotesRepository quotesRepository;
     public QuotesController() {
-        objectMapper = new ObjectMapper();
         sc = new Scanner(System.in);
-        if (quotesService == null)
-            quotesService = new QuotesService();
+        quotesService = new QuotesService();
+
+        if (quotesList.size() > 0){
+            Quotes quotes = quotesList.get(quotesList.size() - 1);
+            id = quotes.getId()+1;
+        }
     }
 
     public void register() {
@@ -32,9 +31,9 @@ public class QuotesController {
         System.out.print("작가 : ");
         String author = sc.nextLine();
 
-        quotesService.register(new Quotes(id++, name, author));
+        quotesService.register(new Quotes(id, name, author));
 
-        System.out.println(id + "번 명언이 등록되었습니다.");
+        System.out.println(id++ + "번 명언이 등록되었습니다.");
 
     }
 

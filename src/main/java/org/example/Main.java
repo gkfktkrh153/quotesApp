@@ -18,9 +18,11 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         File file = new File();
 
-        QuotesController quotesController = new QuotesController();
+
 
         file.readJson(); // 명언 리스트 불러오기
+
+        QuotesController quotesController = new QuotesController();
 
         System.out.println("== 명언 앱 ==");
         String command;

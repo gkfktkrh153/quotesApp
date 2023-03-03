@@ -7,14 +7,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class QuotesRepository {
-    private static List<Quotes> quotesList = new ArrayList<>();
+    public static final List<Quotes> quotesList = new ArrayList<>();
     public QuotesRepository(){
     }
 
     public static List<Quotes> getQuotesList(){
-        if( quotesList == null){
-            quotesList =  new ArrayList<>();
-        }
         return quotesList;
     }
     public void load(List<Quotes> list){
