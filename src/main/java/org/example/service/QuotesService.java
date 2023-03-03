@@ -14,10 +14,12 @@ import java.util.stream.Collectors;
 
 public class QuotesService {
 
-    private final QuotesRepository quotesRepository;
+    private QuotesRepository quotesRepository;
     private final Scanner sc;
     public QuotesService(){
-        quotesRepository = new QuotesRepository();
+        if (quotesRepository == null){
+            quotesRepository = new QuotesRepository();
+        }
         sc = new Scanner(System.in);
     }
 

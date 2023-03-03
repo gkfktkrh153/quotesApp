@@ -16,12 +16,13 @@ public class QuotesController {
     private int id = 1;
     private final Scanner sc;
     private final ObjectMapper objectMapper;
-    private final QuotesService quotesService;
+    private QuotesService quotesService;
 
     public QuotesController() {
         objectMapper = new ObjectMapper();
         sc = new Scanner(System.in);
-        quotesService = new QuotesService();
+        if (quotesService == null)
+            quotesService = new QuotesService();
     }
 
     public void register() {

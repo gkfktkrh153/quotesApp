@@ -22,8 +22,8 @@ public class File {
     private QuotesRepository quotesRepository;
 
     public File(){
-        quotesService = new QuotesService();
         objectMapper = new ObjectMapper();
+        quotesService = new QuotesService();
         quotesRepository = new QuotesRepository();
 
     }
@@ -41,6 +41,7 @@ public class File {
         catch (MismatchedInputException e)
         {
             FileWriter file = new FileWriter("C:/codeLion/project/quotesApp/quotesApp/data.json");
+            System.out.println("잘못된 입력 형식입니다.");
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -52,7 +53,7 @@ public class File {
     public void writeJson() {
         try {
             FileWriter file = new FileWriter("C:/codeLion/project/quotesApp/quotesApp/data.json");
-            file.write(objectMapper.writeValueAsString(quotesService.getList()));
+            file.write(objectMapper.writeValueAsString(quotesRepository.findAll()));
             System.out.println("data.json파일의 내용이 갱신되었습니다.");
             file.flush();
             file.close();

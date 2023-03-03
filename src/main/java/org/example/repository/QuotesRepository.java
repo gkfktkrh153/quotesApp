@@ -4,15 +4,24 @@ import org.example.domain.Quotes;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class QuotesRepository {
-    private final List<Quotes> quotesList;
+    private static List<Quotes> quotesList = new ArrayList<>();
     public QuotesRepository(){
-        quotesList = new ArrayList<>();
+    }
+
+    public static List<Quotes> getQuotesList(){
+        if( quotesList == null){
+            quotesList =  new ArrayList<>();
+        }
+        return quotesList;
     }
     public void load(List<Quotes> list){
-        list.stream().map(e -> quotesList.add(e));
-
+        List<Quotes> collect = list.stream().collect(Collectors.toList());
+        for(Quotes quotes : collect){
+            quotesList.add(quotes);
+        }
     }
 
     public void save(Quotes quotes) {
